@@ -1,120 +1,138 @@
 "use client"
 import { Timeline } from "@/components/ui/timeline"
-import { Trophy, Calendar, Target, Users, BookOpen, Globe } from "lucide-react"
+import { Trophy, Calendar, Target, Users, BookOpen, Globe, ShieldCheck, Rocket } from "lucide-react"
 
 const TimelineSection = () => {
   const data = [
     {
-      title: "2024",
+      title: "2025",
       content: (
-        <div>
-          <div className="flex items-center gap-3 mb-4">
-            <Trophy className="w-6 h-6 text-yellow-400" />
-            <h3 className="text-xl font-bold text-white bruno-ace-regular">Chapter Foundation</h3>
+        <div className="relative pl-2">
+          {/* Header */}
+          <div className="flex items-center gap-4 mb-6">
+            <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+              <ShieldCheck className="w-8 h-8 text-cyan-400" />
+            </div>
+            <h3 className="text-2xl font-bold text-white bruno-ace-regular tracking-wide">
+              Chapter <span className="text-cyan-400 text-glow">Foundation</span>
+            </h3>
           </div>
-          <p className="mb-8 text-sm font-normal text-gray-300 md:text-base">
+
+          <p className="mb-8 text-gray-300 text-base leading-relaxed border-l-2 border-cyan-500/20 pl-4">
             Cyber Peace Corps KIIT Chapter was officially established with a mission to promote cybersecurity awareness
             and digital literacy across the university campus and beyond.
           </p>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="glass-card rounded-lg p-4 text-center">
-              <Users className="w-8 h-8 text-purple-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">500+</div>
-              <div className="text-gray-400 text-sm">Members Joined</div>
+
+          {/* Stats Grid */}
+          <div className="grid grid-cols-2 gap-6">
+            <div className="group glass-card rounded-xl p-5 text-center border border-white/5 hover:border-cyan-500/30 transition-all duration-300">
+              <Users className="w-8 h-8 text-blue-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+              <div className="text-3xl font-bold text-white mb-1">500+</div>
+              <div className="text-gray-400 text-sm font-medium">Members Joined</div>
             </div>
-            <div className="glass-card rounded-lg p-4 text-center">
-              <Calendar className="w-8 h-8 text-blue-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">25+</div>
-              <div className="text-gray-400 text-sm">Events Organized</div>
+            <div className="group glass-card rounded-xl p-5 text-center border border-white/5 hover:border-cyan-500/30 transition-all duration-300">
+              <Calendar className="w-8 h-8 text-cyan-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+              <div className="text-3xl font-bold text-white mb-1">25+</div>
+              <div className="text-gray-400 text-sm font-medium">Events Organized</div>
             </div>
           </div>
         </div>
       ),
     },
     {
-      title: "Mid 2024",
+      title: "Mid 2025",
       content: (
-        <div>
-          <div className="flex items-center gap-3 mb-4">
-            <Target className="w-6 h-6 text-green-400" />
-            <h3 className="text-xl font-bold text-white bruno-ace-regular">Major Achievements</h3>
+        <div className="relative pl-2">
+          {/* Header */}
+          <div className="flex items-center gap-4 mb-6">
+            <div className="p-3 rounded-xl bg-blue-600/10 border border-blue-500/30 shadow-[0_0_15px_rgba(37,99,235,0.2)]">
+              <Trophy className="w-8 h-8 text-blue-400" />
+            </div>
+            <h3 className="text-2xl font-bold text-white bruno-ace-regular tracking-wide">
+              Major <span className="text-blue-400 text-glow">Achievements</span>
+            </h3>
           </div>
-          <p className="mb-8 text-sm font-normal text-gray-300 md:text-base">
+
+          <p className="mb-8 text-gray-300 text-base leading-relaxed border-l-2 border-blue-500/20 pl-4">
             Our chapter achieved significant milestones including winning national competitions, establishing industry
             partnerships, and launching innovative cybersecurity programs.
           </p>
-          <div className="space-y-3 mb-6">
-            <div className="flex items-center gap-3 text-sm text-gray-300">
-              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-              First place in National Cybersecurity Hackathon
-            </div>
-            <div className="flex items-center gap-3 text-sm text-gray-300">
-              <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-              Partnership with leading cybersecurity firms
-            </div>
-            <div className="flex items-center gap-3 text-sm text-gray-300">
-              <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-              Launch of ethical hacking certification program
-            </div>
-            <div className="flex items-center gap-3 text-sm text-gray-300">
-              <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-              Research publication on AI-driven threat detection
-            </div>
+
+          {/* List with Animated Dots */}
+          <div className="space-y-4 mb-8">
+            {[
+              "First place in National Cybersecurity Hackathon",
+              "Partnership with leading cybersecurity firms",
+              "Launch of ethical hacking certification program",
+              "Research publication on AI-driven threat detection"
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-4 text-sm text-gray-300 group">
+                <div className={`w-2 h-2 rounded-full ${i % 2 === 0 ? "bg-cyan-400" : "bg-blue-400"} group-hover:animate-ping`} />
+                <span className="group-hover:text-white transition-colors">{item}</span>
+              </div>
+            ))}
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="glass-card rounded-lg p-4 text-center">
-              <Trophy className="w-8 h-8 text-yellow-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">10+</div>
-              <div className="text-gray-400 text-sm">Awards Won</div>
+
+          {/* Stats Grid */}
+          <div className="grid grid-cols-2 gap-6">
+            <div className="group glass-card rounded-xl p-5 text-center border border-white/5 hover:border-blue-500/30 transition-all duration-300">
+              <Target className="w-8 h-8 text-cyan-300 mx-auto mb-3 group-hover:rotate-12 transition-transform" />
+              <div className="text-3xl font-bold text-white mb-1">10+</div>
+              <div className="text-gray-400 text-sm font-medium">Awards Won</div>
             </div>
-            <div className="glass-card rounded-lg p-4 text-center">
-              <BookOpen className="w-8 h-8 text-pink-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">5+</div>
-              <div className="text-gray-400 text-sm">Research Papers</div>
+            <div className="group glass-card rounded-xl p-5 text-center border border-white/5 hover:border-blue-500/30 transition-all duration-300">
+              <BookOpen className="w-8 h-8 text-blue-300 mx-auto mb-3 group-hover:rotate-12 transition-transform" />
+              <div className="text-3xl font-bold text-white mb-1">5+</div>
+              <div className="text-gray-400 text-sm font-medium">Research Papers</div>
             </div>
           </div>
         </div>
       ),
     },
     {
-      title: "Late 2024",
+      title: "2026",
       content: (
-        <div>
-          <div className="flex items-center gap-3 mb-4">
-            <Globe className="w-6 h-6 text-blue-400" />
-            <h3 className="text-xl font-bold text-white bruno-ace-regular">Community Impact</h3>
+        <div className="relative pl-2">
+           {/* Header */}
+           <div className="flex items-center gap-4 mb-6">
+            <div className="p-3 rounded-xl bg-indigo-500/10 border border-indigo-500/30 shadow-[0_0_15px_rgba(99,102,241,0.2)]">
+              <Rocket className="w-8 h-8 text-indigo-400" />
+            </div>
+            <h3 className="text-2xl font-bold text-white bruno-ace-regular tracking-wide">
+              Future <span className="text-indigo-400 text-glow">Vision</span>
+            </h3>
           </div>
-          <p className="mb-4 text-sm font-normal text-gray-300 md:text-base">
-            Expanded our reach through community outreach programs and digital literacy initiatives.
+
+          <p className="mb-8 text-gray-300 text-base leading-relaxed border-l-2 border-indigo-500/20 pl-4">
+            Expanding our reach through community outreach programs and digital literacy initiatives to build a safer internet for everyone.
           </p>
-          <div className="space-y-3 mb-6">
-            <div className="flex items-center gap-3 text-sm text-gray-300">
-              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-              Digital literacy program for 1000+ rural students
-            </div>
-            <div className="flex items-center gap-3 text-sm text-gray-300">
-              <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-              Cybersecurity awareness workshops in schools
-            </div>
-            <div className="flex items-center gap-3 text-sm text-gray-300">
-              <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-              Industry mentorship program launch
-            </div>
-            <div className="flex items-center gap-3 text-sm text-gray-300">
-              <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-              Open source cybersecurity tools development
-            </div>
+
+          {/* List with Animated Dots */}
+          <div className="space-y-4 mb-8">
+            {[
+              "Digital literacy program for 1000+ rural students",
+              "Cybersecurity awareness workshops in schools",
+              "Industry mentorship program launch",
+              "Open source cybersecurity tools development"
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-4 text-sm text-gray-300 group">
+                <div className="w-2 h-2 rounded-full bg-indigo-400 group-hover:animate-ping" />
+                <span className="group-hover:text-white transition-colors">{item}</span>
+              </div>
+            ))}
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="glass-card rounded-lg p-4 text-center">
-              <Users className="w-8 h-8 text-green-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">1000+</div>
-              <div className="text-gray-400 text-sm">Students Reached</div>
+
+          {/* Stats Grid */}
+          <div className="grid grid-cols-2 gap-6">
+            <div className="group glass-card rounded-xl p-5 text-center border border-white/5 hover:border-indigo-500/30 transition-all duration-300">
+              <Users className="w-8 h-8 text-indigo-300 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+              <div className="text-3xl font-bold text-white mb-1">1000+</div>
+              <div className="text-gray-400 text-sm font-medium">Students Reached</div>
             </div>
-            <div className="glass-card rounded-lg p-4 text-center">
-              <Globe className="w-8 h-8 text-blue-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">50+</div>
-              <div className="text-gray-400 text-sm">Schools Visited</div>
+            <div className="group glass-card rounded-xl p-5 text-center border border-white/5 hover:border-indigo-500/30 transition-all duration-300">
+              <Globe className="w-8 h-8 text-purple-300 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+              <div className="text-3xl font-bold text-white mb-1">50+</div>
+              <div className="text-gray-400 text-sm font-medium">Schools Visited</div>
             </div>
           </div>
         </div>
@@ -123,8 +141,23 @@ const TimelineSection = () => {
   ]
 
   return (
-    <section id="timeline" className="bg-black">
-      <Timeline data={data} />
+    <section id="timeline" className="bg-black py-10 relative overflow-hidden">
+        {/* Background Gradients */}
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black via-slate-950 to-black pointer-events-none" />
+        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-cyan-900/10 blur-[120px] rounded-full pointer-events-none" />
+        
+        <div className="relative z-10">
+            {/* --- ADDED HIGHLIGHTED TEXT --- */}
+            <div className="flex justify-center mb-8">
+                <div className="px-6 py-2 rounded-full border border-cyan-500/50 bg-cyan-500/10 shadow-[0_0_30px_rgba(6,182,212,0.25)] backdrop-blur-md">
+                    <span className="text-lg md:text-xl font-bold text-cyan-300 tracking-widest uppercase drop-shadow-[0_0_10px_rgba(6,182,212,0.8)]">
+                        CCOE established - Lab B103
+                    </span>
+                </div>
+            </div>
+
+            <Timeline data={data} />
+        </div>
     </section>
   )
 }

@@ -1,12 +1,12 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import {User} from "lucide-react";
+import { User } from "lucide-react";
 
 const LeadSlider = () => {
   const leads = [
     {
-      name: "Prabhanwita Satpathy",
+      name: "Kushagra Bhatnagar",
       position: "President",
       domain: "Overall",
       image: "/leads/PS.png",
@@ -14,10 +14,10 @@ const LeadSlider = () => {
       icon: User,
     },
     {
-      name: "Anshuman Banerjee",
+      name: "Devyansh Dhody",
       position: "Vice President",
       domain: "Overall",
-      image: "/leads/AB.jpg",
+      image: "/leads/AB.png",
       bio: "CSE student contributing across domains, ensuring the synergy of tech, design, and management.",
       icon: User,
     },
@@ -64,8 +64,12 @@ const LeadSlider = () => {
   ];
 
   return (
-    <section id="ourleads" className="py-20 overflow-hidden bg-black">
-      <div className="container mx-auto px-6 mb-12">
+    <section id="ourleads" className="py-20 overflow-hidden bg-black relative">
+        
+      {/* Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-900/10 blur-[120px] rounded-full pointer-events-none" />
+
+      <div className="container mx-auto px-6 mb-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -73,8 +77,8 @@ const LeadSlider = () => {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <h2 className="bruno-ace-regular text-4xl md:text-6xl text-yellow-400 text-glow mb-4">
-            OUR LEADS
+          <h2 className="bruno-ace-regular text-4xl md:text-6xl text-white mb-4">
+            OUR <span className="text-purple-400 text-glow">LEADS</span>
           </h2>
           <p className="text-gray-300 text-xl max-w-2xl mx-auto">
             Meet the dedicated leaders driving our cybersecurity mission forward
@@ -83,7 +87,7 @@ const LeadSlider = () => {
       </div>
 
       {/* Infinite Sliding Container */}
-      <div className="relative">
+      <div className="relative z-10">
         <div className="flex animate-scroll-reverse">
           {/* First set */}
           {leads.map((lead, index) => (
@@ -99,9 +103,7 @@ const LeadSlider = () => {
       <style jsx>{`
         @keyframes scroll-reverse {
           0% {
-            transform: translateX(
-              -${leads.length * 280}px
-            ); /* Adjust based on card width + margin */
+            transform: translateX(-${leads.length * 300}px); /* Adjusted for wider cards */
           }
           100% {
             transform: translateX(0);
@@ -109,10 +111,13 @@ const LeadSlider = () => {
         }
 
         .animate-scroll-reverse {
-          animation: scroll-reverse 60s linear infinite; /* Slower speed */
-          width: ${leads.length *
-          280 *
-          2}px; /* Adjust based on card width + margin */
+          animation: scroll-reverse 50s linear infinite;
+          width: ${leads.length * 300 * 2}px;
+        }
+        
+        /* Pause on hover */
+        .animate-scroll-reverse:hover {
+            animation-play-state: paused;
         }
       `}</style>
     </section>
@@ -120,67 +125,69 @@ const LeadSlider = () => {
 };
 
 const LeadCard = ({ name, position, domain, image, bio, icon: Icon }) => {
+  // Check if lead is President or VP
+  const isTopLead = position === "President" || position === "Vice President";
+  
+  // Dynamic Styles
+  const cardBorder = isTopLead ? "border-yellow-500/50" : "border-purple-500/20";
+  const badgeStyle = isTopLead 
+    ? "bg-gradient-to-r from-yellow-600 to-amber-600 text-white border-yellow-400" 
+    : "glass text-purple-200 border-purple-400";
+    
   return (
     <motion.div
-      whileHover={{ scale: 1.03, rotateY: 5, z: 50 }}
-      className="group relative overflow-hidden rounded-3xl glass-card p-6 h-96 flex-shrink-0 w-64 mr-8" /* Adjusted width and margin */
+      whileHover={{ scale: 1.05, y: -10 }}
+      className={`group relative overflow-hidden rounded-3xl glass-card p-6 h-[420px] flex-shrink-0 w-72 mr-8 border ${cardBorder} transition-all duration-300`}
     >
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-pink-600 opacity-20" />
-        <div className="absolute inset-0 cyber-grid" />
+      <div className="absolute inset-0 opacity-20">
+        <div className={`absolute inset-0 bg-gradient-to-br ${isTopLead ? "from-yellow-900 via-amber-900 to-black" : "from-purple-900 to-black"} opacity-40`} />
+        {isTopLead && <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay" />} 
       </div>
 
       {/* Profile Image */}
-      <motion.div
-        whileHover={{ scale: 1.1 }}
-        className="relative z-10 w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden glass border-2 border-purple-400"
-      >
-        <Image
-          src={image || "/placeholder.svg"}
-          alt={name}
-          width={300}
-          height={300}
-          className="w-full h-full object-cover"
-        />
-      </motion.div>
+      <div className="relative z-10 flex justify-center mb-6">
+        <div className={`relative w-28 h-28 rounded-full p-1 bg-gradient-to-br ${isTopLead ? "from-yellow-300 via-amber-500 to-yellow-600" : "from-purple-400 to-blue-500"}`}>
+            <div className="w-full h-full rounded-full overflow-hidden border-2 border-black bg-black">
+                <Image
+                src={image || "/placeholder.svg"}
+                alt={name}
+                width={300}
+                height={300}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+            </div>
+        </div>
+      </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center">
-        <motion.h3
-          whileHover={{ scale: 1.05 }}
-          className="text-xl font-bold text-white mb-2 bruno-ace-regular"
-        >
+      <div className="relative z-10 text-center space-y-3">
+        <h3 className={`text-xl font-bold ${isTopLead ? "text-yellow-100" : "text-white"} bruno-ace-regular`}>
           {name}
-        </motion.h3>
+        </h3>
 
-        <div className="mb-3">
-          <span className="inline-block px-3 py-1 rounded-full glass text-sm font-medium text-purple-200 border border-purple-400 mb-2">
+        <div className="flex flex-col items-center gap-2">
+          <span className={`inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide border ${badgeStyle} shadow-lg`}>
             {position}
           </span>
-          <p className="text-yellow-400 text-sm font-semibold">{domain}</p>
+          <span className={`text-xs font-semibold ${isTopLead ? "text-amber-300" : "text-cyan-300"}`}>
+             {domain}
+          </span>
         </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="text-gray-300 text-sm leading-relaxed"
-        >
+        <p className="text-gray-400 text-sm leading-relaxed line-clamp-3 group-hover:text-gray-200 transition-colors duration-300 pt-2 border-t border-white/10">
           {bio}
-        </motion.p>
+        </p>
       </div>
 
       {/* Hover Glow Effect */}
-      <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 glow" />
+      <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none ${isTopLead ? "shadow-[inset_0_0_50px_rgba(234,179,8,0.2)]" : "shadow-[inset_0_0_50px_rgba(168,85,247,0.2)]"}`} />
+      
+      {/* Animated Border Gradient for Top Leads */}
+      {isTopLead && (
+         <div className="absolute inset-0 border-2 border-transparent rounded-3xl bg-gradient-to-r from-yellow-500/0 via-yellow-500/30 to-yellow-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+      )}
 
-      {/* Border Animation */}
-      <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
-        whileHover={{ scale: 1, opacity: 1 }}
-        className="absolute inset-0 rounded-3xl border-2 border-gradient-to-r from-purple-400 to-pink-400"
-      />
     </motion.div>
   );
 };

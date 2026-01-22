@@ -12,33 +12,14 @@
   font-style: normal;
 }
 
-.glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.glass-dark {
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-}
-
+/* --- NEW BACKGROUND START --- */
 .animated-bg {
-  background: linear-gradient(-45deg, #1a0033, #2d1b69, #8f1db4, #1a0033, #0f0f23);
+  /* Replaced purple/pink with Deep Slate/Blue-Grey tones */
+  background: linear-gradient(-45deg, #020617, #0f172a, #1e293b, #0f172a, #020617);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
 }
+/* --- NEW BACKGROUND END --- */
 
 @keyframes gradientShift {
   0% {
@@ -52,8 +33,9 @@
   }
 }
 
+/* Also updated the secondary gradient to match the new blue theme */
 .gradient-bg {
-  background: linear-gradient(270deg, #8f1db4 0%, #222872 25%, #8f1db4 50%, #222872 100%);
+  background: linear-gradient(270deg, #334155 0%, #0f172a 25%, #475569 50%, #0f172a 100%);
   background-size: 400% 400%;
   animation: gradientBG 6s ease infinite;
 }
@@ -70,6 +52,28 @@
   }
 }
 
+.glass {
+  background: rgba(255, 255, 255, 0.03); /* Made slightly more subtle */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-card {
+  background: rgba(30, 41, 59, 0.3); /* Slate tint */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(2, 6, 23, 0.5); /* Darker shadow */
+}
+
 .floating {
   animation: floating 3s ease-in-out infinite;
 }
@@ -84,17 +88,19 @@
   }
 }
 
+/* Updated Glow to Blue/Cyan */
 .glow {
-  box-shadow: 0 0 20px rgba(143, 29, 180, 0.5);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); /* Cyan glow */
 }
 
 .text-glow {
-  text-shadow: 0 0 20px rgba(143, 29, 180, 0.8);
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.6); /* Cyan text glow */
 }
 
+/* Updated Grid to be subtle Blue */
 .cyber-grid {
-  background-image: linear-gradient(rgba(143, 29, 180, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(143, 29, 180, 0.1) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
   background-size: 50px 50px;
   animation: gridMove 20s linear infinite;
 }
@@ -110,7 +116,7 @@
 
 .neon-border {
   border: 2px solid transparent;
-  background: linear-gradient(45deg, #8f1db4, #222872) border-box;
+  background: linear-gradient(45deg, #38bdf8, #1e293b) border-box; /* Cyan to Slate */
   -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: exclude;
   mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
@@ -126,7 +132,7 @@
 
 .particle {
   position: absolute;
-  background: rgba(143, 29, 180, 0.2);
+  background: rgba(56, 189, 248, 0.2); /* Cyan particles */
   border-radius: 50%;
   animation: float 6s ease-in-out infinite;
 }
