@@ -8,7 +8,6 @@ const LeadSlider = () => {
     {
       name: "Kushagra Bhatnagar",
       position: "President",
-      domain: "Overall",
       image: "/leads/PS.png",
       bio: "CSE student leading with innovation, fostering collaborative growth.",
       icon: User,
@@ -16,7 +15,6 @@ const LeadSlider = () => {
     {
       name: "Devyansh Dhody",
       position: "Vice President",
-      domain: "Overall",
       image: "/leads/AB.png",
       bio: "CSE student contributing across domains, ensuring the synergy of tech, design, and management.",
       icon: User,
@@ -57,7 +55,7 @@ const LeadSlider = () => {
       name: "Vikram Kumar Sahu",
       position: "Domain Lead",
       domain: "AI/ML",
-      image: "/leads/aiml.jpeg", // ✅ Added AI/ML Lead
+      image: "/leads/aiml.jpeg",
       bio: "CSE student leveraging AI and ML algorithms to revolutionize cybersecurity landscapes.",
       icon: User,
     },
@@ -65,8 +63,16 @@ const LeadSlider = () => {
       name: "Sanidhya Kamthan",
       position: "Domain Lead",
       domain: "R&D",
-      image: "/leads/rnd.jpeg", // ✅ Added R&D Lead
+      image: "/leads/rnd.jpeg",
       bio: "CSE student driving innovation through dedicated research and development in emerging tech frontiers.",
+      icon: User,
+    },
+    {
+      name: "Swarnim Kumar",
+      position: "Domain Lead",
+      domain: "Digital Forensics",
+      image: "/leads/DF.jpeg", // ✅ Added Digital Forensics Lead
+      bio: "CSE student investigating digital footprints and analyzing complex forensic evidence.",
       icon: User,
     },
     {
