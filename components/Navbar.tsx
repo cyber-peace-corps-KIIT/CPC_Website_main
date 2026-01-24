@@ -27,13 +27,13 @@ const Navbar = () => {
         animate={{ y: 0, x: "-50%", opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         className={`fixed top-6 left-1/2 z-50 transform -translate-x-1/2 
-        w-[95%] max-w-6xl rounded-full border border-white/10 
+        w-[calc(100%-2rem)] md:w-[95%] max-w-6xl rounded-full border border-white/10 
         bg-black/60 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] 
         transition-all duration-500 ${
           isScrolled ? "py-2 bg-black/80" : "py-3 bg-black/40"
         }`}
       >
-        <div className="px-6 md:px-8">
+        <div className="px-4 md:px-8">
           <div className="flex items-center justify-between h-full">
             
             {/* Logo Section */}
@@ -46,7 +46,7 @@ const Navbar = () => {
                 alt="Cyber Peace Corps Logo"
                 width={180} 
                 height={50}
-                className="object-contain h-10 w-auto"
+                className="object-contain h-8 md:h-10 w-auto" // Slightly smaller on mobile (h-8)
               />
             </motion.div>
 
@@ -61,7 +61,7 @@ const Navbar = () => {
                 >
                   <a
                     href={`#${item.toLowerCase().replace(" ", "")}`}
-                    className="text-gray-300 text-sm font-medium hover:text-white transition-colors duration-300 tracking-wide"
+                    className="text-gray-300 text-sm font-medium hover:text-white transition-colors duration-300 tracking-wide font-sans"
                   >
                     {item}
                     <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-cyan-500 group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
@@ -116,19 +116,20 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed top-24 left-1/2 -translate-x-1/2 w-[90%] max-w-sm z-40 bg-black/90 backdrop-blur-xl border border-white/10 rounded-2xl p-6 lg:hidden shadow-2xl"
+            className="fixed top-24 left-0 right-0 mx-4 z-40 bg-black/90 backdrop-blur-xl border border-white/10 rounded-2xl p-4 sm:p-6 lg:hidden shadow-2xl max-w-sm mx-auto"
           >
-            <ul className="flex flex-col space-y-4 text-center">
+            <ul className="flex flex-col space-y-3 sm:space-y-4 text-center">
               {menuItems.map((item, index) => (
                 <motion.li
                   key={index}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
+                  className="w-full"
                 >
                   <a
                     href={`#${item.toLowerCase().replace(" ", "")}`}
-                    className="block text-white text-lg font-medium hover:text-purple-400 py-2"
+                    className="block text-white text-base sm:text-lg font-medium hover:text-purple-400 py-2 font-sans truncate"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item}
@@ -139,7 +140,7 @@ const Navbar = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
-                className="w-full bg-white text-black py-3 rounded-xl font-bold mt-4"
+                className="w-full bg-white text-black py-3 rounded-xl font-bold mt-2 sm:mt-4"
                 onClick={() => window.open(REGISTER_LINK, '_blank')}
               >
                 Join Now

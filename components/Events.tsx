@@ -14,6 +14,7 @@ const Events = () => {
       description: "Join the elite force of Cyber Peace Corps. We are scouting for passionate individuals ready to defend the digital frontier.",
       type: "Recruitment",
       status: "Registration Open",
+      link: "https://docs.google.com/forms/d/e/1FAIpQLSdq8TLd_YpfS6joVh3AP27r7e7RllTv_JTQeOpMSjBKvklTbA/viewform"
     },
     {
       title: "Offline Workshop",
@@ -22,6 +23,7 @@ const Events = () => {
       description: "An intensive hands-on session covering the latest in penetration testing and network defense strategies.",
       type: "Workshop",
       status: "Coming Soon",
+      // No link
     },
     {
       title: "Online Cybersecurity Webinar",
@@ -30,6 +32,7 @@ const Events = () => {
       description: "An expert-led session diving deep into modern cybersecurity trends, threats, and career pathways.",
       type: "Webinar",
       status: "Coming Soon",
+      // No link
     },
   ]
 
@@ -175,6 +178,19 @@ const EventCard = ({ event, index }) => {
   }
 
   const isCompleted = event.status === "Completed"
+  const isComingSoon = event.status === "Coming Soon"
+
+  // Determine button styles based on status
+  let buttonStyles = "bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg hover:shadow-cyan-500/20"
+  let buttonText = "Register Now"
+
+  if (isCompleted) {
+    buttonStyles = "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+    buttonText = "View Recap"
+  } else if (isComingSoon) {
+    buttonStyles = "bg-cyan-900/20 text-cyan-400 border border-cyan-500/30 cursor-not-allowed"
+    buttonText = "Coming Soon"
+  }
 
   return (
     <motion.div
@@ -226,16 +242,14 @@ const EventCard = ({ event, index }) => {
 
       {/* CTA Button */}
       <motion.button
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className={`relative z-10 w-full py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all duration-300 ${
-          isCompleted 
-          ? "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white" 
-          : "bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg hover:shadow-cyan-500/20"
-        }`}
+        whileHover={{ scale: isComingSoon ? 1 : 1.02 }}
+        whileTap={{ scale: isComingSoon ? 1 : 0.98 }}
+        onClick={() => !isComingSoon && event.link && window.open(event.link, '_blank')}
+        disabled={isComingSoon}
+        className={`relative z-10 w-full py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all duration-300 ${buttonStyles}`}
       >
-        {isCompleted ? "View Recap" : "Register Now"}
-        {!isCompleted && <ArrowRight className="w-4 h-4" />}
+        {buttonText}
+        {!isCompleted && !isComingSoon && <ArrowRight className="w-4 h-4" />}
       </motion.button>
 
     </motion.div>
