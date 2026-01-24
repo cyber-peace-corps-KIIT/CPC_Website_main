@@ -38,11 +38,11 @@ const LeadSlider = () => {
       icon: User,
     },
     {
-      name: "Swapnil Dey",
+      name: "Shreejeeta Sahay",
       position: "Domain Lead",
       domain: "Cybersecurity",
       image: "/leads/SD.png",
-      bio: "IT student diving deep into penetration testing and security protocol development.",
+      bio: "CSE student diving deep into penetration testing and security protocol development.",
       icon: User,
     },
     {
@@ -51,6 +51,22 @@ const LeadSlider = () => {
       domain: "Cybersecurity",
       image: "/leads/AC.jpg",
       bio: "B.Tech CSSE student researching secure network architectures and cloud security enhancements.",
+      icon: User,
+    },
+    {
+      name: "Vikram Kumar Sahu",
+      position: "Domain Lead",
+      domain: "AI/ML",
+      image: "/leads/aiml.jpeg", // ✅ Added AI/ML Lead
+      bio: "CSE student leveraging AI and ML algorithms to revolutionize cybersecurity landscapes.",
+      icon: User,
+    },
+    {
+      name: "Sanidhya Kamthan",
+      position: "Domain Lead",
+      domain: "R&D",
+      image: "/leads/rnd.jpeg", // ✅ Added R&D Lead
+      bio: "CSE student driving innovation through dedicated research and development in emerging tech frontiers.",
       icon: User,
     },
     {
