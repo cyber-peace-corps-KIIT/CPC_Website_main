@@ -70,11 +70,11 @@ const LeadSlider = () => {
       icon: User,
     },
     {
-      name: "Ritesh Kumar Mohanty",
+      name: "Ojasvi Goyal",
       position: "Domain Lead",
       domain: "Event Management",
       image: "/leads/RKM.jpg",
-      bio: "Electronics and Computer Science enthusiast coordinating tech fests and cyber awareness programs.",
+      bio: "Computer Science enthusiast coordinating tech fests and cyber awareness programs.",
       icon: User,
     },
   ];
