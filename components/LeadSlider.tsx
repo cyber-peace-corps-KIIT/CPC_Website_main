@@ -72,7 +72,7 @@ const LeadSlider = () => {
       position: "Domain Lead",
       domain: "Digital Forensics",
       image: "/leads/DF.jpeg", // ✅ Added Digital Forensics Lead
-      bio: "CSE student investigating digital footprints and analyzing complex forensic evidence.",
+      bio: "CSCE student investigating digital footprints and analyzing complex forensic evidence.",
       icon: User,
     },
     {
