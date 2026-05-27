@@ -152,14 +152,14 @@ const leadTimelines: Record<LeadTimeline, Lead[]> = {
   ],
   "2025": [
     {
-      name: "Kushagra Bhatnagar",
+      name: "Prabhanwita Satpathy",
       position: "President",
       image: "/leads/PS.png",
       bio: "CSE student leading with innovation, fostering collaborative growth.",
       icon: User,
     },
     {
-      name: "Devyansh Dhody",
+      name: "Anshuman Banerjee",
       position: "Vice President",
       image: "/leads/AB.png",
       bio: "CSE student contributing across domains, ensuring the synergy of tech, design, and management.",
