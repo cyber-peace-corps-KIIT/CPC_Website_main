@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { User } from "lucide-react";
 
-type LeadTimeline = "Founding Leads" | "2024" | "2025" | "2026";
+type LeadTimeline = "Founding Leads" | "2025" | "2026";
 
 type Lead = {
   name: string;
@@ -15,6 +15,16 @@ type Lead = {
   bio: string;
   status?: "active" | "upcoming";
   icon: typeof User;
+  alternates?: LeadProfile[];
+};
+
+type LeadProfile = {
+  name: string;
+  position: string;
+  domain?: string;
+  image: string;
+  bio: string;
+  status?: "active" | "upcoming";
 };
 
 const leadTemplate = (year: string): Lead[] => [
@@ -71,6 +81,15 @@ const leadTemplate = (year: string): Lead[] => [
     image: "/logo.png",
     bio: `Add the ${year} event management lead's photo and details here.`,
     icon: User,
+    alternates: [
+      {
+        name: "Event Management Co-Lead",
+        position: "Domain Lead",
+        domain: "Event Management",
+        image: "/logo.png",
+        bio: `Add the ${year} second event management lead's photo and details here.`,
+      },
+    ],
   },
   {
     name: "Digital Forensics Lead",
@@ -131,7 +150,6 @@ const leadTimelines: Record<LeadTimeline, Lead[]> = {
       icon: User,
     },
   ],
-  "2024": leadTemplate("2024"),
   "2025": [
     {
       name: "Kushagra Bhatnagar",
@@ -210,12 +228,21 @@ const leadTimelines: Record<LeadTimeline, Lead[]> = {
       image: "/leads/RKM.jpg",
       bio: "Computer Science enthusiast coordinating tech fests and cyber awareness programs.",
       icon: User,
+      alternates: [
+        {
+          name: "Ritesh Kumar Mohanty",
+          position: "Domain Lead",
+          domain: "Event Management",
+          image: "/leads/Event2.jpeg",
+          bio: "Computer Science enthusiast coordinating tech fests and cyber awareness programs.",
+        },
+      ],
     },
   ],
   "2026": leadTemplate("2026"),
 };
 
-const timelineOrder: LeadTimeline[] = ["Founding Leads", "2024", "2025", "2026"];
+const timelineOrder: LeadTimeline[] = ["Founding Leads", "2025", "2026"];
 
 const LeadSlider = () => {
   const [selectedYear, setSelectedYear] = useState<LeadTimeline>("2025");
@@ -243,7 +270,7 @@ const LeadSlider = () => {
           </p>
 
           <div className="mt-10 flex justify-center">
-            <div className="relative grid w-full max-w-3xl grid-cols-2 gap-3 rounded-[28px] border border-white/10 bg-white/[0.03] p-2 backdrop-blur-xl sm:grid-cols-4 sm:rounded-full">
+            <div className="relative grid w-full max-w-2xl grid-cols-1 gap-3 rounded-[28px] border border-white/10 bg-white/[0.03] p-2 backdrop-blur-xl sm:grid-cols-3 sm:rounded-full">
               <div className="absolute left-8 right-8 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-purple-400/40 to-transparent" />
               {timelineOrder.map((year) => {
                 const isSelected = selectedYear === year;
@@ -318,9 +345,17 @@ const LeadSlider = () => {
   );
 };
 
-const LeadCard = ({ name, position, domain, image, bio, status }: Lead) => {
-  const isTopLead = position === "President" || position === "Vice President";
-  const isUpcoming = status === "upcoming";
+const LeadCard = ({ name, position, domain, image, bio, status, alternates }: Lead) => {
+  const [activeProfile, setActiveProfile] = useState(0);
+  const profiles: LeadProfile[] = [
+    { name, position, domain, image, bio, status },
+    ...(alternates ?? []),
+  ];
+  const lead = profiles[activeProfile];
+  const hasAlternates = profiles.length > 1;
+  const nextProfile = () => setActiveProfile((current) => (current + 1) % profiles.length);
+  const isTopLead = lead.position === "President" || lead.position === "Vice President";
+  const isUpcoming = lead.status === "upcoming";
 
   const cardBorder = isUpcoming
     ? "border-cyan-500/40"
@@ -364,8 +399,9 @@ const LeadCard = ({ name, position, domain, image, bio, status }: Lead) => {
         >
           <div className="w-full h-full rounded-full overflow-hidden border-2 border-black bg-black">
             <Image
-              src={image}
-              alt={name}
+              key={lead.image}
+              src={lead.image}
+              alt={lead.name}
               width={300}
               height={300}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -381,29 +417,40 @@ const LeadCard = ({ name, position, domain, image, bio, status }: Lead) => {
             isUpcoming ? "text-cyan-100" : isTopLead ? "text-yellow-100" : "text-white"
           } bruno-ace-regular`}
         >
-          {name}
+          {lead.name}
         </h3>
 
         <div className="flex flex-col items-center gap-2">
           <span
             className={`inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide border ${badgeStyle} shadow-lg`}
           >
-            {position}
+            {lead.position}
           </span>
-          {domain && (
+          {lead.domain && (
             <span
               className={`text-xs font-semibold ${
                 isTopLead ? "text-amber-300" : "text-cyan-300"
               }`}
             >
-              {domain}
+              {lead.domain}
             </span>
           )}
         </div>
 
         <p className="text-gray-400 text-sm leading-relaxed line-clamp-3 group-hover:text-gray-200 transition-colors duration-300 pt-2 border-t border-white/10">
-          {bio}
+          {lead.bio}
         </p>
+
+        {hasAlternates && (
+          <button
+            type="button"
+            onClick={nextProfile}
+            className="mx-auto mt-2 flex items-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-300/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-cyan-200 transition hover:border-cyan-200 hover:bg-cyan-300/20 hover:text-white"
+            aria-label={`Show next ${lead.domain ?? lead.position} lead`}
+          >
+            <span>{activeProfile + 1}/{profiles.length}</span>
+          </button>
+        )}
       </div>
 
       {/* Hover Glow Effect */}
