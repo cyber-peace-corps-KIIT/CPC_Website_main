@@ -1,10 +1,152 @@
 "use client";
+
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { User } from "lucide-react";
 
-const LeadSlider = () => {
-  const leads = [
+type LeadTimeline = "Founding Leads" | "2024" | "2025" | "2026";
+
+type Lead = {
+  name: string;
+  position: string;
+  domain?: string;
+  image: string;
+  bio: string;
+  status?: "active" | "upcoming";
+  icon: typeof User;
+};
+
+const leadTemplate = (year: string): Lead[] => [
+  {
+    name: "President",
+    position: "President",
+    image: "/logo.png",
+    bio: `Add the ${year} president's photo and details here.`,
+    icon: User,
+  },
+  {
+    name: "Vice President",
+    position: "Vice President",
+    image: "/logo.png",
+    bio: `Add the ${year} vice president's photo and details here.`,
+    icon: User,
+  },
+  {
+    name: "Cybersecurity Lead",
+    position: "Domain Lead",
+    domain: "Cybersecurity",
+    image: "/logo.png",
+    bio: `Add the ${year} cybersecurity lead's photo and details here.`,
+    icon: User,
+  },
+  {
+    name: "Web Dev Lead",
+    position: "Domain Lead",
+    domain: "Web Dev",
+    image: "/logo.png",
+    bio: `Add the ${year} web development lead's photo and details here.`,
+    icon: User,
+  },
+  {
+    name: "AI/ML Lead",
+    position: "Domain Lead",
+    domain: "AI/ML",
+    image: "/logo.png",
+    bio: `Add the ${year} AI/ML lead's photo and details here.`,
+    icon: User,
+  },
+  {
+    name: "Graphic Design Lead",
+    position: "Domain Lead",
+    domain: "Graphic Design",
+    image: "/logo.png",
+    bio: `Add the ${year} graphic design lead's photo and details here.`,
+    icon: User,
+  },
+  {
+    name: "Event Management Lead",
+    position: "Domain Lead",
+    domain: "Event Management",
+    image: "/logo.png",
+    bio: `Add the ${year} event management lead's photo and details here.`,
+    icon: User,
+  },
+  {
+    name: "Digital Forensics Lead",
+    position: "Domain Lead",
+    domain: "Digital Forensics",
+    image: "/logo.png",
+    bio: `Add the ${year} digital forensics lead's photo and details here.`,
+    icon: User,
+  },
+  {
+    name: "R&D Lead",
+    position: "Domain Lead",
+    domain: "R&D",
+    image: "/logo.png",
+    bio: `Add the ${year} R&D lead's photo and details here.`,
+    icon: User,
+  },
+];
+
+const leadTimelines: Record<LeadTimeline, Lead[]> = {
+  "Founding Leads": [
+    {
+      name: "Founder",
+      position: "Founding Lead",
+      image: "/logo.png",
+      bio: "Add the founding lead's photo and details here.",
+      icon: User,
+    },
+    {
+      name: "Co-Founder",
+      position: "Founding Lead",
+      image: "/logo.png",
+      bio: "Add the co-founder's photo and details here.",
+      icon: User,
+    },
+    {
+      name: "President",
+      position: "President",
+      image: "/logo.png",
+      bio: "Add the founding president's photo and details here.",
+      icon: User,
+    },
+    {
+      name: "Vice President",
+      position: "Vice President",
+      image: "/logo.png",
+      bio: "Add the founding vice president's photo and details here.",
+      icon: User,
+    },
+    {
+      name: "Cybersecurity Lead",
+      position: "Domain Lead",
+      domain: "Cybersecurity",
+      image: "/logo.png",
+      bio: "Add the founding cybersecurity lead's photo and details here.",
+      icon: User,
+    },
+    {
+      name: "Web Dev Lead",
+      position: "Domain Lead",
+      domain: "Web Dev",
+      image: "/logo.png",
+      bio: "Add the founding web development lead's photo and details here.",
+      icon: User,
+    },
+    {
+      name: "Design Lead",
+      position: "Domain Lead",
+      domain: "Graphic Design",
+      image: "/logo.png",
+      bio: "Add the founding design lead's photo and details here.",
+      icon: User,
+    },
+  ],
+  "2024": leadTemplate("2024"),
+  "2025": [
     {
       name: "Kushagra Bhatnagar",
       position: "President",
@@ -71,7 +213,7 @@ const LeadSlider = () => {
       name: "Swarnim Kumar",
       position: "Domain Lead",
       domain: "Digital Forensics",
-      image: "/leads/DF.jpeg", // ✅ Added Digital Forensics Lead
+      image: "/leads/DF.jpeg",
       bio: "CSCE student investigating digital footprints and analyzing complex forensic evidence.",
       icon: User,
     },
@@ -83,11 +225,19 @@ const LeadSlider = () => {
       bio: "Computer Science enthusiast coordinating tech fests and cyber awareness programs.",
       icon: User,
     },
-  ];
+  ],
+  "2026": leadTemplate("2026"),
+};
+
+const timelineOrder: LeadTimeline[] = ["Founding Leads", "2024", "2025", "2026"];
+
+const LeadSlider = () => {
+  const [selectedYear, setSelectedYear] = useState<LeadTimeline>("2025");
+  const leads = leadTimelines[selectedYear];
+  const shouldSlide = leads.length > 1;
 
   return (
     <section id="ourleads" className="py-20 overflow-hidden bg-black relative">
-        
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-900/10 blur-[120px] rounded-full pointer-events-none" />
 
@@ -105,27 +255,64 @@ const LeadSlider = () => {
           <p className="text-gray-300 text-xl max-w-2xl mx-auto">
             Meet the dedicated leaders driving our cybersecurity mission forward
           </p>
+
+          <div className="mt-10 flex justify-center">
+            <div className="relative grid w-full max-w-3xl grid-cols-2 gap-3 rounded-[28px] border border-white/10 bg-white/[0.03] p-2 backdrop-blur-xl sm:grid-cols-4 sm:rounded-full">
+              <div className="absolute left-8 right-8 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-purple-400/40 to-transparent" />
+              {timelineOrder.map((year) => {
+                const isSelected = selectedYear === year;
+                const isFounding = year === "Founding Leads";
+                const selectedStyle = isFounding
+                  ? "border-yellow-300 bg-yellow-400 text-black shadow-[0_0_25px_rgba(250,204,21,0.45)]"
+                  : "border-purple-300 bg-purple-400 text-black shadow-[0_0_25px_rgba(192,132,252,0.45)]";
+                const idleStyle = isFounding
+                  ? "border-white/10 bg-black/70 text-gray-300 hover:border-yellow-300/70 hover:text-yellow-100 hover:shadow-[0_0_20px_rgba(250,204,21,0.25)]"
+                  : "border-white/10 bg-black/70 text-gray-300 hover:border-purple-300/50 hover:text-white";
+
+                return (
+                  <button
+                    key={year}
+                    type="button"
+                    onClick={() => setSelectedYear(year)}
+                    aria-pressed={isSelected}
+                    className={`relative z-10 flex min-h-12 items-center justify-center gap-2 rounded-full border px-4 text-sm font-bold transition-all duration-300 sm:text-base ${
+                      isSelected ? selectedStyle : idleStyle
+                    }`}
+                  >
+                    <span
+                      className={`h-2.5 w-2.5 rounded-full ${
+                        isSelected ? "bg-black" : isFounding ? "bg-yellow-300" : "bg-purple-300"
+                      }`}
+                    />
+                    {year}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </motion.div>
       </div>
 
       {/* Infinite Sliding Container */}
       <div className="relative z-10">
-        <div className="flex animate-scroll-reverse">
-          {/* First set */}
+        <div
+          key={selectedYear}
+          className={`flex ${shouldSlide ? "animate-scroll-reverse" : "justify-center"}`}
+        >
           {leads.map((lead, index) => (
             <LeadCard key={`first-${index}`} {...lead} />
           ))}
-          {/* Second set for seamless loop */}
-          {leads.map((lead, index) => (
-            <LeadCard key={`second-${index}`} {...lead} />
-          ))}
+          {shouldSlide &&
+            leads.map((lead, index) => (
+              <LeadCard key={`second-${index}`} {...lead} />
+            ))}
         </div>
       </div>
 
       <style jsx>{`
         @keyframes scroll-reverse {
           0% {
-            transform: translateX(-${leads.length * 300}px); /* Adjusted for wider cards */
+            transform: translateX(-${leads.length * 300}px);
           }
           100% {
             transform: translateX(0);
@@ -136,26 +323,30 @@ const LeadSlider = () => {
           animation: scroll-reverse 50s linear infinite;
           width: ${leads.length * 300 * 2}px;
         }
-        
-        /* Pause on hover */
+
         .animate-scroll-reverse:hover {
-            animation-play-state: paused;
+          animation-play-state: paused;
         }
       `}</style>
     </section>
   );
 };
 
-const LeadCard = ({ name, position, domain, image, bio, icon: Icon }) => {
-  // Check if lead is President or VP
+const LeadCard = ({ name, position, domain, image, bio, status }: Lead) => {
   const isTopLead = position === "President" || position === "Vice President";
-  
-  // Dynamic Styles
-  const cardBorder = isTopLead ? "border-yellow-500/50" : "border-purple-500/20";
-  const badgeStyle = isTopLead 
-    ? "bg-gradient-to-r from-yellow-600 to-amber-600 text-white border-yellow-400" 
-    : "glass text-purple-200 border-purple-400";
-    
+  const isUpcoming = status === "upcoming";
+
+  const cardBorder = isUpcoming
+    ? "border-cyan-500/40"
+    : isTopLead
+      ? "border-yellow-500/50"
+      : "border-purple-500/20";
+  const badgeStyle = isUpcoming
+    ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-black border-cyan-200"
+    : isTopLead
+      ? "bg-gradient-to-r from-yellow-600 to-amber-600 text-white border-yellow-400"
+      : "glass text-purple-200 border-purple-400";
+
   return (
     <motion.div
       whileHover={{ scale: 1.05, y: -10 }}
@@ -163,38 +354,65 @@ const LeadCard = ({ name, position, domain, image, bio, icon: Icon }) => {
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-20">
-        <div className={`absolute inset-0 bg-gradient-to-br ${isTopLead ? "from-yellow-900 via-amber-900 to-black" : "from-purple-900 to-black"} opacity-40`} />
-        {isTopLead && <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay" />} 
+        <div
+          className={`absolute inset-0 bg-gradient-to-br ${
+            isUpcoming
+              ? "from-cyan-900 via-blue-900 to-black"
+              : isTopLead
+                ? "from-yellow-900 via-amber-900 to-black"
+                : "from-purple-900 to-black"
+          } opacity-40`}
+        />
       </div>
 
       {/* Profile Image */}
       <div className="relative z-10 flex justify-center mb-6">
-        <div className={`relative w-28 h-28 rounded-full p-1 bg-gradient-to-br ${isTopLead ? "from-yellow-300 via-amber-500 to-yellow-600" : "from-purple-400 to-blue-500"}`}>
-            <div className="w-full h-full rounded-full overflow-hidden border-2 border-black bg-black">
-                <Image
-                src={image || "/placeholder.svg"}
-                alt={name}
-                width={300}
-                height={300}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-            </div>
+        <div
+          className={`relative w-28 h-28 rounded-full p-1 bg-gradient-to-br ${
+            isUpcoming
+              ? "from-cyan-300 via-blue-500 to-purple-600"
+              : isTopLead
+                ? "from-yellow-300 via-amber-500 to-yellow-600"
+                : "from-purple-400 to-blue-500"
+          }`}
+        >
+          <div className="w-full h-full rounded-full overflow-hidden border-2 border-black bg-black">
+            <Image
+              src={image}
+              alt={name}
+              width={300}
+              height={300}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+          </div>
         </div>
       </div>
 
       {/* Content */}
       <div className="relative z-10 text-center space-y-3">
-        <h3 className={`text-xl font-bold ${isTopLead ? "text-yellow-100" : "text-white"} bruno-ace-regular`}>
+        <h3
+          className={`text-xl font-bold ${
+            isUpcoming ? "text-cyan-100" : isTopLead ? "text-yellow-100" : "text-white"
+          } bruno-ace-regular`}
+        >
           {name}
         </h3>
 
         <div className="flex flex-col items-center gap-2">
-          <span className={`inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide border ${badgeStyle} shadow-lg`}>
+          <span
+            className={`inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide border ${badgeStyle} shadow-lg`}
+          >
             {position}
           </span>
-          <span className={`text-xs font-semibold ${isTopLead ? "text-amber-300" : "text-cyan-300"}`}>
-             {domain}
-          </span>
+          {domain && (
+            <span
+              className={`text-xs font-semibold ${
+                isTopLead ? "text-amber-300" : "text-cyan-300"
+              }`}
+            >
+              {domain}
+            </span>
+          )}
         </div>
 
         <p className="text-gray-400 text-sm leading-relaxed line-clamp-3 group-hover:text-gray-200 transition-colors duration-300 pt-2 border-t border-white/10">
@@ -203,13 +421,20 @@ const LeadCard = ({ name, position, domain, image, bio, icon: Icon }) => {
       </div>
 
       {/* Hover Glow Effect */}
-      <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none ${isTopLead ? "shadow-[inset_0_0_50px_rgba(234,179,8,0.2)]" : "shadow-[inset_0_0_50px_rgba(168,85,247,0.2)]"}`} />
-      
+      <div
+        className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none ${
+          isUpcoming
+            ? "shadow-[inset_0_0_50px_rgba(34,211,238,0.2)]"
+            : isTopLead
+              ? "shadow-[inset_0_0_50px_rgba(234,179,8,0.2)]"
+              : "shadow-[inset_0_0_50px_rgba(168,85,247,0.2)]"
+        }`}
+      />
+
       {/* Animated Border Gradient for Top Leads */}
       {isTopLead && (
-         <div className="absolute inset-0 border-2 border-transparent rounded-3xl bg-gradient-to-r from-yellow-500/0 via-yellow-500/30 to-yellow-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+        <div className="absolute inset-0 border-2 border-transparent rounded-3xl bg-gradient-to-r from-yellow-500/0 via-yellow-500/30 to-yellow-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
       )}
-
     </motion.div>
   );
 };
