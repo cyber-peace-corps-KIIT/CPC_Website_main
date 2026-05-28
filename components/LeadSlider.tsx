@@ -27,88 +27,6 @@ type LeadProfile = {
   status?: "active" | "upcoming";
 };
 
-const leadTemplate = (year: string): Lead[] => [
-  {
-    name: "President",
-    position: "President",
-    image: "/logo.png",
-    bio: `Add the ${year} president's photo and details here.`,
-    icon: User,
-  },
-  {
-    name: "Vice President",
-    position: "Vice President",
-    image: "/logo.png",
-    bio: `Add the ${year} vice president's photo and details here.`,
-    icon: User,
-  },
-  {
-    name: "Cybersecurity Lead",
-    position: "Domain Lead",
-    domain: "Cybersecurity",
-    image: "/logo.png",
-    bio: `Add the ${year} cybersecurity lead's photo and details here.`,
-    icon: User,
-  },
-  {
-    name: "Web Dev Lead",
-    position: "Domain Lead",
-    domain: "Web Dev",
-    image: "/logo.png",
-    bio: `Add the ${year} web development lead's photo and details here.`,
-    icon: User,
-  },
-  {
-    name: "AI/ML Lead",
-    position: "Domain Lead",
-    domain: "AI/ML",
-    image: "/logo.png",
-    bio: `Add the ${year} AI/ML lead's photo and details here.`,
-    icon: User,
-  },
-  {
-    name: "Graphic Design Lead",
-    position: "Domain Lead",
-    domain: "Graphic Design",
-    image: "/logo.png",
-    bio: `Add the ${year} graphic design lead's photo and details here.`,
-    icon: User,
-  },
-  {
-    name: "Event Management Lead",
-    position: "Domain Lead",
-    domain: "Event Management",
-    image: "/logo.png",
-    bio: `Add the ${year} event management lead's photo and details here.`,
-    icon: User,
-    alternates: [
-      {
-        name: "Event Management Co-Lead",
-        position: "Domain Lead",
-        domain: "Event Management",
-        image: "/logo.png",
-        bio: `Add the ${year} second event management lead's photo and details here.`,
-      },
-    ],
-  },
-  {
-    name: "Digital Forensics Lead",
-    position: "Domain Lead",
-    domain: "Digital Forensics",
-    image: "/logo.png",
-    bio: `Add the ${year} digital forensics lead's photo and details here.`,
-    icon: User,
-  },
-  {
-    name: "R&D Lead",
-    position: "Domain Lead",
-    domain: "R&D",
-    image: "/logo.png",
-    bio: `Add the ${year} R&D lead's photo and details here.`,
-    icon: User,
-  },
-];
-
 const leadTimelines: Record<LeadTimeline, Lead[]> = {
   "Founding Leads": [
     {
@@ -239,13 +157,145 @@ const leadTimelines: Record<LeadTimeline, Lead[]> = {
       ],
     },
   ],
-  "2026": leadTemplate("2026"),
+  "2026": [
+    {
+      name: "Kushagra Bhatnagar",
+      position: "President",
+      image: "/Leads - 2026/Kushagra Bhatnagar - President .jpeg",
+      bio: "Guiding the chapter with a focus on collaboration, execution, and student-led cybersecurity impact.",
+      icon: User,
+    },
+    {
+      name: "Devyansh Dhody",
+      position: "Vice President",
+      image: "/Leads - 2026/Devyansh Dhody - Vice President.jpeg",
+      bio: "Supporting cross-team coordination and helping keep the chapter's technical and management work aligned.",
+      icon: User,
+    },
+    {
+      name: "Debayan Samal",
+      position: "Domain Lead",
+      domain: "Web Development",
+      image: "/Leads - 2026/Debayan Samal - Web Development .jpeg",
+      bio: "Building polished, reliable web experiences for the chapter's digital presence.",
+      icon: User,
+      alternates: [
+        {
+          name: "K Kushang",
+          position: "Domain Lead",
+          domain: "Web Development",
+          image: "/Leads - 2026/K Kushang - Web Devlopment .jpeg",
+          bio: "Contributing to web development with a focus on clean interfaces and practical delivery.",
+        },
+      ],
+    },
+    {
+      name: "Debansh",
+      position: "Domain Lead",
+      domain: "Cybersecurity & Digital Forensics",
+      image: "/Leads - 2026/Debansh - Cybersecurity X Digital Forensic .jpeg",
+      bio: "Driving hands-on security learning, investigation skills, and practical cyber defense work.",
+      icon: User,
+      alternates: [
+        {
+          name: "Oishika",
+          position: "Domain Lead",
+          domain: "Cybersecurity & Digital Forensics",
+          image: "/Leads - 2026/Oishika - Cybersecurity X Digital Forensics .jpeg",
+          bio: "Strengthening the chapter's security and forensics initiatives through focused teamwork.",
+        },
+      ],
+    },
+    {
+      name: "Vikram",
+      position: "Domain Lead",
+      domain: "Artificial Intelligence & Machine Learning",
+      image: "/Leads - 2026/Vikram - Artificial Intelligence & Machine Learning .jpeg",
+      bio: "Exploring intelligent systems and AI-driven ideas for modern cybersecurity challenges.",
+      icon: User,
+    },
+    {
+      name: "Arunabh",
+      position: "Domain Lead",
+      domain: "Cloud Computing",
+      image: "/Leads - 2026/Arunabh - Cloud Computing Lead .jpeg",
+      bio: "Leading cloud-focused learning around scalable systems, deployment, and secure infrastructure.",
+      icon: User,
+    },
+    {
+      name: "Aditya",
+      position: "Domain Lead",
+      domain: "Research & Development",
+      image: "/Leads - 2026/Aditya - Research & Devlopment .jpeg",
+      bio: "Pushing research ideas forward and helping turn experiments into usable chapter projects.",
+      icon: User,
+      alternates: [
+        {
+          name: "Kashvi",
+          position: "Domain Lead",
+          domain: "Research & Development",
+          image: "/Leads - 2026/Kashvi - Research & Devlopment .jpeg",
+          bio: "Supporting innovation, documentation, and exploratory technical work across the chapter.",
+        },
+      ],
+    },
+    {
+      name: "B Saikiran",
+      position: "Domain Lead",
+      domain: "Graphic Design",
+      image: "/Leads - 2026/B Saikiran - Graphic Designing .jpeg",
+      bio: "Creating visual systems and design assets that make the chapter's work feel sharp and recognizable.",
+      icon: User,
+      alternates: [
+        {
+          name: "Swagat",
+          position: "Domain Lead",
+          domain: "Graphic Design",
+          image: "/Leads - 2026/Swagat - Graphic Designing .jpeg",
+          bio: "Designing creative visuals that support events, campaigns, and chapter storytelling.",
+        },
+      ],
+    },
+    {
+      name: "Amulya",
+      position: "Domain Lead",
+      domain: "Event Management & Marketing",
+      image: "/Leads - 2026/Amulya - Event Management X Marketing .jpeg",
+      bio: "Planning outreach and events that connect students with meaningful cybersecurity opportunities.",
+      icon: User,
+      alternates: [
+        {
+          name: "Archisman",
+          position: "Domain Lead",
+          domain: "Event Management & Marketing",
+          image: "/Leads - 2026/Archisman - Event Management X Marketing .jpeg",
+          bio: "Coordinating campaigns and event execution to keep chapter programs active and visible.",
+        },
+      ],
+    },
+    {
+      name: "Sanniva",
+      position: "Domain Lead",
+      domain: "Social Media",
+      image: "/Leads - 2026/Sanniva - Social Media .jpeg",
+      bio: "Sharing the chapter's work online through clear, timely, and engaging communication.",
+      icon: User,
+    },
+    {
+      name: "Satyajit",
+      position: "Domain Lead",
+      domain: "Human Resources",
+      image: "/Leads - 2026/Satyajit - Human Resources.jpeg",
+      bio: "Supporting people, coordination, and team operations so the chapter can work smoothly.",
+      icon: User,
+    },
+  ],
 };
 
 const timelineOrder: LeadTimeline[] = ["Founding Leads", "2025", "2026"];
 
 const LeadSlider = () => {
-  const [selectedYear, setSelectedYear] = useState<LeadTimeline>("2025");
+  const [selectedYear, setSelectedYear] = useState<LeadTimeline>("2026");
   const leads = leadTimelines[selectedYear];
   const shouldSlide = leads.length > 1;
 
@@ -346,14 +396,12 @@ const LeadSlider = () => {
 };
 
 const LeadCard = ({ name, position, domain, image, bio, status, alternates }: Lead) => {
-  const [activeProfile, setActiveProfile] = useState(0);
   const profiles: LeadProfile[] = [
     { name, position, domain, image, bio, status },
     ...(alternates ?? []),
   ];
-  const lead = profiles[activeProfile];
   const hasAlternates = profiles.length > 1;
-  const nextProfile = () => setActiveProfile((current) => (current + 1) % profiles.length);
+  const lead = profiles[0];
   const isTopLead = lead.position === "President" || lead.position === "Vice President";
   const isUpcoming = lead.status === "upcoming";
 
@@ -367,6 +415,64 @@ const LeadCard = ({ name, position, domain, image, bio, status, alternates }: Le
     : isTopLead
       ? "bg-gradient-to-r from-yellow-600 to-amber-600 text-white border-yellow-400"
       : "glass text-purple-200 border-purple-400";
+
+  if (hasAlternates) {
+    return (
+      <motion.div
+        whileHover={{ y: -10 }}
+        className={`group relative h-[420px] w-80 flex-shrink-0 overflow-hidden rounded-3xl border ${cardBorder} glass-card p-5 mr-8 transition-all duration-500 hover:w-[560px]`}
+      >
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-slate-950 to-black opacity-60" />
+        </div>
+
+        <div className="relative z-10 flex h-full flex-col">
+          <div className="mb-4 flex justify-center">
+            <div className="text-center">
+              <span className={`inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide border ${badgeStyle} shadow-lg`}>
+                {lead.position}
+              </span>
+              {lead.domain && (
+                <p className="mt-2 text-sm font-semibold text-cyan-300">{lead.domain}</p>
+              )}
+            </div>
+          </div>
+
+          <div className="grid flex-1 grid-cols-2 gap-3">
+            {profiles.map((profile) => (
+              <div
+                key={`${profile.name}-${profile.image}`}
+                className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 p-3 transition-all duration-500 group-hover:border-cyan-300/40 group-hover:bg-white/[0.04]"
+              >
+                <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-cyan-400/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="relative mx-auto mb-3 h-24 w-24 rounded-full bg-gradient-to-br from-purple-400 to-blue-500 p-1 transition-transform duration-500 group-hover:scale-105">
+                  <div className="h-full w-full overflow-hidden rounded-full border-2 border-black bg-black">
+                    <Image
+                      src={profile.image}
+                      alt={profile.name}
+                      width={240}
+                      height={240}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                  </div>
+                </div>
+                <div className="relative text-center">
+                  <h3 className="bruno-ace-regular text-base font-bold leading-tight text-white transition-colors duration-300 group-hover:text-cyan-100">
+                    {profile.name}
+                  </h3>
+                  <p className="mt-3 border-t border-white/10 pt-3 text-xs leading-relaxed text-gray-400 line-clamp-4 transition-colors duration-500 group-hover:text-gray-200">
+                    {profile.bio}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none shadow-[inset_0_0_60px_rgba(34,211,238,0.16)]" />
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
@@ -440,17 +546,6 @@ const LeadCard = ({ name, position, domain, image, bio, status, alternates }: Le
         <p className="text-gray-400 text-sm leading-relaxed line-clamp-3 group-hover:text-gray-200 transition-colors duration-300 pt-2 border-t border-white/10">
           {lead.bio}
         </p>
-
-        {hasAlternates && (
-          <button
-            type="button"
-            onClick={nextProfile}
-            className="mx-auto mt-2 flex items-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-300/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-cyan-200 transition hover:border-cyan-200 hover:bg-cyan-300/20 hover:text-white"
-            aria-label={`Show next ${lead.domain ?? lead.position} lead`}
-          >
-            <span>{activeProfile + 1}/{profiles.length}</span>
-          </button>
-        )}
       </div>
 
       {/* Hover Glow Effect */}
