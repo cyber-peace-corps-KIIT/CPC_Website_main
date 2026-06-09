@@ -69,6 +69,7 @@ const ChangingTagline = () => {
 // --- MAIN HERO COMPONENT ---
 const Hero = () => {
   const WEBINAR_FORM_EMBED = "https://docs.google.com/forms/d/e/1FAIpQLSdc5wQ-B8CtHRyLaylD7jnmhdY1aW4cwxApI0VawhXfe6rJXw/viewform?embedded=true";
+  const WHATSAPP_GROUP_LINK = "https://chat.whatsapp.com/LmEV1bUAsyj9CpqnhtuLh4";
 
   // FIX: Store particles in state so they are only generated on the client
   const [particles, setParticles] = useState<Array<{ top: string; left: string; delay: number; duration: number }>>([]);
@@ -205,6 +206,19 @@ const Hero = () => {
                 title="Cyber Peace Corps KIIT Online Webinar Registration"
                 className="h-full w-full flex-1 bg-white"
               />
+              <div className="flex flex-col gap-3 border-t border-white/10 bg-slate-950 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-sm text-gray-300">
+                  After submitting the form, join the webinar WhatsApp group for updates and the meeting link.
+                </p>
+                <a
+                  href={WHATSAPP_GROUP_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-full bg-green-500 px-5 py-2.5 text-sm font-bold text-black transition hover:bg-green-400"
+                >
+                  Join WhatsApp Group
+                </a>
+              </div>
             </motion.div>
           </motion.div>
         )}

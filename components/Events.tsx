@@ -5,10 +5,11 @@ import { Calendar, MapPin, ArrowRight } from "lucide-react"
 
 const Events = () => {
   const [activeTab, setActiveTab] = useState("upcoming")
-  const [activeForm, setActiveForm] = useState<{ title: string; embedLink: string } | null>(null)
+  const [activeForm, setActiveForm] = useState<{ title: string; embedLink: string; whatsappLink?: string } | null>(null)
 
   const webinarFormLink = "https://docs.google.com/forms/d/e/1FAIpQLSdc5wQ-B8CtHRyLaylD7jnmhdY1aW4cwxApI0VawhXfe6rJXw/viewform?usp=dialog"
   const webinarFormEmbed = "https://docs.google.com/forms/d/e/1FAIpQLSdc5wQ-B8CtHRyLaylD7jnmhdY1aW4cwxApI0VawhXfe6rJXw/viewform?embedded=true"
+  const whatsappGroupLink = "https://chat.whatsapp.com/LmEV1bUAsyj9CpqnhtuLh4"
 
   const upcomingEvents = [
     {
@@ -20,6 +21,7 @@ const Events = () => {
       status: "Registration Open",
       link: webinarFormLink,
       embedLink: webinarFormEmbed,
+      whatsappLink: whatsappGroupLink,
     },
     {
       title: "Offline Workshop",
@@ -199,6 +201,21 @@ const Events = () => {
                 title={`${activeForm.title} registration form`}
                 className="h-full w-full flex-1 bg-white"
               />
+              {activeForm.whatsappLink && (
+                <div className="flex flex-col gap-3 border-t border-white/10 bg-slate-950 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="text-sm text-gray-300">
+                    After submitting the form, join the webinar WhatsApp group for updates and the meeting link.
+                  </p>
+                  <a
+                    href={activeForm.whatsappLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-full bg-green-500 px-5 py-2.5 text-sm font-bold text-black transition hover:bg-green-400"
+                  >
+                    Join WhatsApp Group
+                  </a>
+                </div>
+              )}
             </motion.div>
           </motion.div>
         )}
@@ -291,7 +308,7 @@ const EventCard = ({ event, index, onOpenForm }) => {
         onClick={() => {
           if (isComingSoon || !event.link) return
           if (event.embedLink) {
-            onOpenForm({ title: event.title, embedLink: event.embedLink })
+            onOpenForm({ title: event.title, embedLink: event.embedLink, whatsappLink: event.whatsappLink })
             return
           }
           window.location.href = event.link
