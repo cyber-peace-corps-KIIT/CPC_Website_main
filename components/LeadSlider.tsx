@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { User } from "lucide-react";
+import { ChevronLeft, ChevronRight, User } from "lucide-react";
 
 type LeadTimeline = "Founding Leads" | "2025" | "2026";
 
@@ -296,8 +296,25 @@ const timelineOrder: LeadTimeline[] = ["Founding Leads", "2025", "2026"];
 
 const LeadSlider = () => {
   const [selectedYear, setSelectedYear] = useState<LeadTimeline>("2026");
+  const [manualOffset, setManualOffset] = useState(0);
   const leads = leadTimelines[selectedYear];
   const shouldSlide = leads.length > 1;
+  const slideStep = 340;
+  const scrollDistance = leads.length * slideStep;
+  const sliderStyle = {
+    "--manual-offset": `${manualOffset}px`,
+  } as CSSProperties;
+
+  const selectTimeline = (year: LeadTimeline) => {
+    setSelectedYear(year);
+    setManualOffset(0);
+  };
+
+  const moveSlider = (direction: "previous" | "next") => {
+    setManualOffset((current) =>
+      direction === "previous" ? current + slideStep : current - slideStep
+    );
+  };
 
   return (
     <section id="ourleads" className="py-20 overflow-hidden bg-black relative">
@@ -336,7 +353,7 @@ const LeadSlider = () => {
                   <button
                     key={year}
                     type="button"
-                    onClick={() => setSelectedYear(year)}
+                    onClick={() => selectTimeline(year)}
                     aria-pressed={isSelected}
                     className={`relative z-10 flex min-h-12 items-center justify-center gap-2 rounded-full border px-4 text-sm font-bold transition-all duration-300 sm:text-base ${
                       isSelected ? selectedStyle : idleStyle
@@ -358,8 +375,29 @@ const LeadSlider = () => {
 
       {/* Infinite Sliding Container */}
       <div className="relative z-10">
+        {shouldSlide && (
+          <>
+            <button
+              type="button"
+              onClick={() => moveSlider("previous")}
+              className="absolute left-3 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/70 text-white shadow-[0_0_25px_rgba(168,85,247,0.2)] backdrop-blur-xl transition hover:border-purple-300/70 hover:bg-purple-400 hover:text-black sm:left-6"
+              aria-label="Show previous leads"
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </button>
+            <button
+              type="button"
+              onClick={() => moveSlider("next")}
+              className="absolute right-3 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/70 text-white shadow-[0_0_25px_rgba(168,85,247,0.2)] backdrop-blur-xl transition hover:border-purple-300/70 hover:bg-purple-400 hover:text-black sm:right-6"
+              aria-label="Show next leads"
+            >
+              <ChevronRight className="h-6 w-6" />
+            </button>
+          </>
+        )}
         <div
           key={selectedYear}
+          style={sliderStyle}
           className={`flex ${shouldSlide ? "animate-scroll-reverse" : "justify-center"}`}
         >
           {leads.map((lead, index) => (
@@ -375,16 +413,16 @@ const LeadSlider = () => {
       <style jsx>{`
         @keyframes scroll-reverse {
           0% {
-            transform: translateX(-${leads.length * 300}px);
+            transform: translateX(calc(var(--manual-offset, 0px) - ${scrollDistance}px));
           }
           100% {
-            transform: translateX(0);
+            transform: translateX(var(--manual-offset, 0px));
           }
         }
 
         .animate-scroll-reverse {
           animation: scroll-reverse 50s linear infinite;
-          width: ${leads.length * 300 * 2}px;
+          width: ${scrollDistance * 2}px;
         }
 
         .animate-scroll-reverse:hover {
