@@ -1,20 +1,25 @@
 "use client"
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { useState } from "react"
 import { Calendar, MapPin, ArrowRight } from "lucide-react"
 
 const Events = () => {
   const [activeTab, setActiveTab] = useState("upcoming")
+  const [activeForm, setActiveForm] = useState<{ title: string; embedLink: string } | null>(null)
+
+  const webinarFormLink = "https://docs.google.com/forms/d/e/1FAIpQLSdc5wQ-B8CtHRyLaylD7jnmhdY1aW4cwxApI0VawhXfe6rJXw/viewform?usp=dialog"
+  const webinarFormEmbed = "https://docs.google.com/forms/d/e/1FAIpQLSdc5wQ-B8CtHRyLaylD7jnmhdY1aW4cwxApI0VawhXfe6rJXw/viewform?embedded=true"
 
   const upcomingEvents = [
     {
-      title: "CPC Recruitment",
-      date: "Early 2026",
-      location: "Campus 25, KIIT",
-      description: "Join the elite force of Cyber Peace Corps. We are scouting for passionate individuals ready to defend the digital frontier.",
-      type: "Recruitment",
+      title: "Dark Web Uncovered",
+      date: "15/06/2026, 4 PM",
+      location: "Online",
+      description: "Join our online webinar for a focused look into dark web risks, cyber awareness, and safer digital practices.",
+      type: "Webinar",
       status: "Registration Open",
-      link: "https://docs.google.com/forms/d/e/1FAIpQLSdq8TLd_YpfS6joVh3AP27r7e7RllTv_JTQeOpMSjBKvklTbA/viewform"
+      link: webinarFormLink,
+      embedLink: webinarFormEmbed,
     },
     {
       title: "Offline Workshop",
@@ -25,18 +30,18 @@ const Events = () => {
       status: "Coming Soon",
       // No link
     },
-    {
-      title: "Online Cybersecurity Webinar",
-      date: "Mid 2026",
-      location: "Online",
-      description: "An expert-led session diving deep into modern cybersecurity trends, threats, and career pathways.",
-      type: "Webinar",
-      status: "Coming Soon",
-      // No link
-    },
   ]
 
   const pastEvents = [
+    {
+      title: "CPC Recruitment",
+      date: "Early 2026",
+      location: "Campus 25, KIIT",
+      description: "Recruitment drive for passionate students ready to contribute across cyber, tech, design, and management domains.",
+      type: "Recruitment",
+      status: "Completed",
+      link: "https://docs.google.com/forms/d/e/1FAIpQLSdq8TLd_YpfS6joVh3AP27r7e7RllTv_JTQeOpMSjBKvklTbA/viewform"
+    },
     {
       title: "CyberPeace Hackathon",
       date: "2026",
@@ -155,15 +160,54 @@ const Events = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
         >
           {events.map((event, index) => (
-            <EventCard key={index} event={event} index={index} />
+            <EventCard key={index} event={event} index={index} onOpenForm={setActiveForm} />
           ))}
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {activeForm && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 px-4 py-6 backdrop-blur-md"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 30, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.96 }}
+              transition={{ duration: 0.25 }}
+              className="relative flex h-[88vh] w-full max-w-5xl flex-col overflow-hidden rounded-3xl border border-cyan-400/30 bg-slate-950 shadow-[0_0_60px_rgba(34,211,238,0.2)]"
+            >
+              <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.3em] text-cyan-300">Registration</p>
+                  <h2 className="mt-1 text-lg font-bold text-white sm:text-xl">{activeForm.title}</h2>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveForm(null)}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-xl text-white transition hover:border-cyan-300 hover:bg-cyan-300/10"
+                  aria-label="Close registration form"
+                >
+                  x
+                </button>
+              </div>
+              <iframe
+                src={activeForm.embedLink}
+                title={`${activeForm.title} registration form`}
+                className="h-full w-full flex-1 bg-white"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }
 
-const EventCard = ({ event, index }) => {
+const EventCard = ({ event, index, onOpenForm }) => {
   const getStatusColor = (status) => {
     switch (status) {
       case "Registration Open":
@@ -244,7 +288,14 @@ const EventCard = ({ event, index }) => {
       <motion.button
         whileHover={{ scale: isComingSoon ? 1 : 1.02 }}
         whileTap={{ scale: isComingSoon ? 1 : 0.98 }}
-        onClick={() => !isComingSoon && event.link && window.open(event.link, '_blank')}
+        onClick={() => {
+          if (isComingSoon || !event.link) return
+          if (event.embedLink) {
+            onOpenForm({ title: event.title, embedLink: event.embedLink })
+            return
+          }
+          window.location.href = event.link
+        }}
         disabled={isComingSoon}
         className={`relative z-10 w-full py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all duration-300 ${buttonStyles}`}
       >

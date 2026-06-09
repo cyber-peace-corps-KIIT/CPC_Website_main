@@ -68,10 +68,11 @@ const ChangingTagline = () => {
 
 // --- MAIN HERO COMPONENT ---
 const Hero = () => {
-  const RECRUITMENT_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSdq8TLd_YpfS6joVh3AP27r7e7RllTv_JTQeOpMSjBKvklTbA/viewform";
+  const WEBINAR_FORM_EMBED = "https://docs.google.com/forms/d/e/1FAIpQLSdc5wQ-B8CtHRyLaylD7jnmhdY1aW4cwxApI0VawhXfe6rJXw/viewform?embedded=true";
 
   // FIX: Store particles in state so they are only generated on the client
   const [particles, setParticles] = useState<Array<{ top: string; left: string; delay: number; duration: number }>>([]);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   useEffect(() => {
     // Generate particles ONLY after component mounts (Client-side only)
@@ -160,15 +161,54 @@ const Hero = () => {
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(56, 189, 248, 0.6)" }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => window.open(RECRUITMENT_LINK, '_blank')}
-              className="group relative px-10 py-5 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-full text-xl font-bold overflow-hidden shadow-2xl border border-cyan-400/30"
+              onClick={() => setIsFormOpen(true)}
+              className="group relative px-7 py-3.5 sm:px-8 sm:py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-full text-sm sm:text-base font-bold overflow-hidden shadow-2xl border border-cyan-400/30"
             >
-              <span className="relative z-10 tracking-widest">RECRUITMENT FORM</span>
+              <span className="relative z-10 tracking-widest">ONLINE WEBINAR REGISTRATION</span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-cyan-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.button>
           </div>
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {isFormOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 px-4 py-6 backdrop-blur-md"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 30, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.96 }}
+              transition={{ duration: 0.25 }}
+              className="relative flex h-[88vh] w-full max-w-5xl flex-col overflow-hidden rounded-3xl border border-cyan-400/30 bg-slate-950 shadow-[0_0_60px_rgba(34,211,238,0.2)]"
+            >
+              <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.3em] text-cyan-300">Cyber Peace Corps KIIT</p>
+                  <h2 className="mt-1 text-lg font-bold text-white sm:text-xl">Online Webinar Registration</h2>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsFormOpen(false)}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-xl text-white transition hover:border-cyan-300 hover:bg-cyan-300/10"
+                  aria-label="Close registration form"
+                >
+                  x
+                </button>
+              </div>
+              <iframe
+                src={WEBINAR_FORM_EMBED}
+                title="Cyber Peace Corps KIIT Online Webinar Registration"
+                className="h-full w-full flex-1 bg-white"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Bottom Fade Gradient */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none z-10"></div>
