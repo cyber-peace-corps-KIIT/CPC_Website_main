@@ -11,9 +11,9 @@ const Events = () => {
   const upcomingEvents = [
     {
       title: "Recruitment Drive",
-      date: "3rd Oct (10 AM - 1 PM) & 4th Oct (10 PM onwards)",
+      date: "3rd Oct (10 AM - 1 PM) & 4th Oct",
       location: "Campus 25",
-      description: "Join Cyber Peace Corps KIIT! Recruitment drive timings: 3rd Oct (10 AM - 1 PM) and 4th Oct (10 PM onwards) at Campus 25.",
+      description: "Join Cyber Peace Corps KIIT! Recruitment drive dates: 3rd Oct (10 AM - 1 PM) and 4th Oct at Campus 25.",
       type: "Recruitment Drive",
       status: "Registration Open",
       link: recruitmentFormLink,
