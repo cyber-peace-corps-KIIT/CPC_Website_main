@@ -7,30 +7,18 @@ const Events = () => {
   const [activeTab, setActiveTab] = useState("upcoming")
   const [activeForm, setActiveForm] = useState<{ title: string; embedLink: string; whatsappLink?: string } | null>(null)
 
-  const webinarFormLink = "https://docs.google.com/forms/d/e/1FAIpQLSdc5wQ-B8CtHRyLaylD7jnmhdY1aW4cwxApI0VawhXfe6rJXw/viewform?usp=dialog"
-  const webinarFormEmbed = "https://docs.google.com/forms/d/e/1FAIpQLSdc5wQ-B8CtHRyLaylD7jnmhdY1aW4cwxApI0VawhXfe6rJXw/viewform?embedded=true"
-  const whatsappGroupLink = "https://chat.whatsapp.com/LmEV1bUAsyj9CpqnhtuLh4"
+  const recruitmentFormLink = "https://forms.gle/3HNmw7Ng3k7cMTMd7"
 
   const upcomingEvents = [
     {
-      title: "Dark Web Uncovered",
-      date: "15/06/2026, 4 PM",
-      location: "Online",
-      description: "Join our online webinar for a focused look into dark web risks, cyber awareness, and safer digital practices.",
-      type: "Webinar",
+      title: "Recruitment Drive",
+      date: "3rd Oct (10 AM - 1 PM) & 4th Oct (10 PM onwards)",
+      location: "Campus 25",
+      description: "Join Cyber Peace Corps KIIT! Recruitment drive timings: 3rd Oct (10 AM - 1 PM) and 4th Oct (10 PM onwards) at Campus 25.",
+      type: "Recruitment Drive",
       status: "Registration Open",
-      link: webinarFormLink,
-      embedLink: webinarFormEmbed,
-      whatsappLink: whatsappGroupLink,
-    },
-    {
-      title: "Offline Workshop",
-      date: "Mid 2026",
-      location: "Campus 25, KIIT",
-      description: "An intensive hands-on session covering the latest in penetration testing and network defense strategies.",
-      type: "Workshop",
-      status: "Coming Soon",
-      // No link
+      link: recruitmentFormLink,
+      embedLink: recruitmentFormLink,
     },
   ]
 
@@ -201,10 +189,10 @@ const Events = () => {
                 title={`${activeForm.title} registration form`}
                 className="h-full w-full flex-1 bg-white"
               />
-              {activeForm.whatsappLink && (
+              {activeForm.whatsappLink ? (
                 <div className="flex flex-col gap-3 border-t border-white/10 bg-slate-950 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
                   <p className="text-sm text-gray-300">
-                    After submitting the form, join the webinar WhatsApp group for updates and the meeting link.
+                    After submitting the form, join the WhatsApp group for updates and the meeting link.
                   </p>
                   <a
                     href={activeForm.whatsappLink}
@@ -213,6 +201,20 @@ const Events = () => {
                     className="inline-flex items-center justify-center rounded-full bg-green-500 px-5 py-2.5 text-sm font-bold text-black transition hover:bg-green-400"
                   >
                     Join WhatsApp Group
+                  </a>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-3 border-t border-white/10 bg-slate-950 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="text-sm text-gray-300">
+                    Fill out the recruitment form to apply for Cyber Peace Corps KIIT.
+                  </p>
+                  <a
+                    href={activeForm.embedLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-full bg-cyan-500 px-5 py-2.5 text-sm font-bold text-black transition hover:bg-cyan-400"
+                  >
+                    Open Form in New Tab
                   </a>
                 </div>
               )}

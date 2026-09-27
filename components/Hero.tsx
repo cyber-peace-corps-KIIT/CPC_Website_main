@@ -68,8 +68,7 @@ const ChangingTagline = () => {
 
 // --- MAIN HERO COMPONENT ---
 const Hero = () => {
-  const WEBINAR_FORM_EMBED = "https://docs.google.com/forms/d/e/1FAIpQLSdc5wQ-B8CtHRyLaylD7jnmhdY1aW4cwxApI0VawhXfe6rJXw/viewform?embedded=true";
-  const WHATSAPP_GROUP_LINK = "https://chat.whatsapp.com/LmEV1bUAsyj9CpqnhtuLh4";
+  const RECRUITMENT_FORM_LINK = "https://forms.gle/3HNmw7Ng3k7cMTMd7";
 
   // FIX: Store particles in state so they are only generated on the client
   const [particles, setParticles] = useState<Array<{ top: string; left: string; delay: number; duration: number }>>([]);
@@ -165,7 +164,7 @@ const Hero = () => {
               onClick={() => setIsFormOpen(true)}
               className="group relative px-7 py-3.5 sm:px-8 sm:py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-full text-sm sm:text-base font-bold overflow-hidden shadow-2xl border border-cyan-400/30"
             >
-              <span className="relative z-10 tracking-widest">ONLINE WEBINAR REGISTRATION</span>
+              <span className="relative z-10 tracking-widest">RECRUITMENT FORM</span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-cyan-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.button>
           </div>
@@ -190,33 +189,33 @@ const Hero = () => {
               <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
                 <div>
                   <p className="text-xs font-bold uppercase tracking-[0.3em] text-cyan-300">Cyber Peace Corps KIIT</p>
-                  <h2 className="mt-1 text-lg font-bold text-white sm:text-xl">Online Webinar Registration</h2>
+                  <h2 className="mt-1 text-lg font-bold text-white sm:text-xl">Recruitment Form</h2>
                 </div>
                 <button
                   type="button"
                   onClick={() => setIsFormOpen(false)}
                   className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-xl text-white transition hover:border-cyan-300 hover:bg-cyan-300/10"
-                  aria-label="Close registration form"
+                  aria-label="Close recruitment form"
                 >
                   x
                 </button>
               </div>
               <iframe
-                src={WEBINAR_FORM_EMBED}
-                title="Cyber Peace Corps KIIT Online Webinar Registration"
+                src={RECRUITMENT_FORM_LINK}
+                title="Cyber Peace Corps KIIT Recruitment Form"
                 className="h-full w-full flex-1 bg-white"
               />
               <div className="flex flex-col gap-3 border-t border-white/10 bg-slate-950 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-sm text-gray-300">
-                  After submitting the form, join the webinar WhatsApp group for updates and the meeting link.
+                  Fill out the recruitment form to apply for Cyber Peace Corps KIIT.
                 </p>
                 <a
-                  href={WHATSAPP_GROUP_LINK}
+                  href={RECRUITMENT_FORM_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-full bg-green-500 px-5 py-2.5 text-sm font-bold text-black transition hover:bg-green-400"
+                  className="inline-flex items-center justify-center rounded-full bg-cyan-500 px-5 py-2.5 text-sm font-bold text-black transition hover:bg-cyan-400"
                 >
-                  Join WhatsApp Group
+                  Open Form in New Tab
                 </a>
               </div>
             </motion.div>

@@ -7,8 +7,8 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  // Link to your Google Form
-  const REGISTER_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSdq8TLd_YpfS6joVh3AP27r7e7RllTv_JTQeOpMSjBKvklTbA/viewform"
+  // Link to Recruitment Form
+  const REGISTER_LINK = "https://forms.gle/3HNmw7Ng3k7cMTMd7"
 
   useEffect(() => {
     const handleScroll = () => {
