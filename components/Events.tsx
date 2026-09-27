@@ -5,7 +5,6 @@ import { Calendar, MapPin, ArrowRight } from "lucide-react"
 
 const Events = () => {
   const [activeTab, setActiveTab] = useState("upcoming")
-  const [activeForm, setActiveForm] = useState<{ title: string; embedLink: string; whatsappLink?: string } | null>(null)
 
   const recruitmentFormLink = "https://forms.gle/3HNmw7Ng3k7cMTMd7"
 
@@ -150,83 +149,15 @@ const Events = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
         >
           {events.map((event, index) => (
-            <EventCard key={index} event={event} index={index} onOpenForm={setActiveForm} />
+            <EventCard key={index} event={event} index={index} />
           ))}
         </motion.div>
       </div>
-
-      <AnimatePresence>
-        {activeForm && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 px-4 py-6 backdrop-blur-md"
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 30, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 20, scale: 0.96 }}
-              transition={{ duration: 0.25 }}
-              className="relative flex h-[88vh] w-full max-w-5xl flex-col overflow-hidden rounded-3xl border border-cyan-400/30 bg-slate-950 shadow-[0_0_60px_rgba(34,211,238,0.2)]"
-            >
-              <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.3em] text-cyan-300">Registration</p>
-                  <h2 className="mt-1 text-lg font-bold text-white sm:text-xl">{activeForm.title}</h2>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setActiveForm(null)}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-xl text-white transition hover:border-cyan-300 hover:bg-cyan-300/10"
-                  aria-label="Close registration form"
-                >
-                  x
-                </button>
-              </div>
-              <iframe
-                src={activeForm.embedLink}
-                title={`${activeForm.title} registration form`}
-                className="h-full w-full flex-1 bg-white"
-              />
-              {activeForm.whatsappLink ? (
-                <div className="flex flex-col gap-3 border-t border-white/10 bg-slate-950 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-                  <p className="text-sm text-gray-300">
-                    After submitting the form, join the WhatsApp group for updates and the meeting link.
-                  </p>
-                  <a
-                    href={activeForm.whatsappLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-full bg-green-500 px-5 py-2.5 text-sm font-bold text-black transition hover:bg-green-400"
-                  >
-                    Join WhatsApp Group
-                  </a>
-                </div>
-              ) : (
-                <div className="flex flex-col gap-3 border-t border-white/10 bg-slate-950 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-                  <p className="text-sm text-gray-300">
-                    Fill out the recruitment form to apply for Cyber Peace Corps KIIT.
-                  </p>
-                  <a
-                    href={activeForm.embedLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-full bg-cyan-500 px-5 py-2.5 text-sm font-bold text-black transition hover:bg-cyan-400"
-                  >
-                    Open Form in New Tab
-                  </a>
-                </div>
-              )}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   )
 }
 
-const EventCard = ({ event, index, onOpenForm }) => {
+const EventCard = ({ event, index }) => {
   const getStatusColor = (status) => {
     switch (status) {
       case "Registration Open":
@@ -309,11 +240,7 @@ const EventCard = ({ event, index, onOpenForm }) => {
         whileTap={{ scale: isComingSoon ? 1 : 0.98 }}
         onClick={() => {
           if (isComingSoon || !event.link) return
-          if (event.embedLink) {
-            onOpenForm({ title: event.title, embedLink: event.embedLink, whatsappLink: event.whatsappLink })
-            return
-          }
-          window.location.href = event.link
+          window.open(event.link, "_blank")
         }}
         disabled={isComingSoon}
         className={`relative z-10 w-full py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all duration-300 ${buttonStyles}`}
